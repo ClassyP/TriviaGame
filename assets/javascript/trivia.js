@@ -1,6 +1,7 @@
 
 
 $(document).on('click', "#start", function () {
+    $(this).hide();
 
     console.log("button clicked");
 
