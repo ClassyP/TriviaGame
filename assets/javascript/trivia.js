@@ -20,7 +20,7 @@ $(document).on('click', "#start", function () {
   
   // Our stopwatch object
   var timer = {
-    time: 0,
+    time: 45,
   
     start: function() {
       // DONE: Use setInterval to start the count here and set the clock to running.
@@ -32,7 +32,7 @@ $(document).on('click', "#start", function () {
    
     count: function() {
       // DONE: increment time by 1, remember we cant use "this" here.
-      timer.time++;
+      timer.time--;
   
       // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
       //       and save the result in a variable.
