@@ -9,6 +9,16 @@
     /* border: 1px dashed deeppink; */
   }
 
+  .well jumbotron {
+    position: absolute;
+    margin: ;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    /* border: 1px dashed deeppink; */
+  }
+
+
   .btn {
     position: center;   
 }

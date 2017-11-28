@@ -59,3 +59,101 @@ $(document).on('click', "#start", function () {
       return minutes + ":" + seconds;
     }
   };
+
+  // Question Array
+
+var allQuestions = [
+    {
+      question: "What is the right answer?",
+      choices: ["First", "Second", "Third"],
+      correctAnswer: 1
+    },
+    
+    {
+      question: "What is the right answer?",
+      choices: ["First", "Second", "Third"],
+      correctAnswer: 0
+    },
+    
+    {
+      question: "What is the right answer?",
+      choices: ["First", "Second", "Third"],
+      correctAnswer: 2
+    },
+    
+    {
+      question: "What is the right answer?",
+      choices: ["First", "Second", "Third"],
+      correctAnswer: 0
+    },
+    
+    {
+      question: "What is the right answer?",
+      choices: ["First", "Second", "Third"],
+      correctAnswer: 1
+    },
+    
+    {
+      question: "What is the right answer?",
+      choices: ["First", "Second", "Third"],
+      correctAnswer: 1
+    },
+    
+    ];
+    
+    var currentquestion = 0;
+    var correctAnswers = 0;
+    
+    function setupOptions() {
+      $('#question').html(parseInt(currentquestion) + 1 + ". " + allQuestions[currentquestion].question);
+      var options = allQuestions[currentquestion].choices;
+      var formHtml = '';
+      for (var i = 0; i < options.length; i++) {
+        formHtml += '<div><input type="radio" name="option" value="' + i + '" id="option' + i + '"><label for="option' + i + '">' +
+          allQuestions[currentquestion].choices[i] + '</label></div><br/>';
+      }
+      $('#form').html(formHtml);
+      $("#option0").prop('checked', true);
+    };
+    
+    function checkAns() {
+      if ($("input[name=option]:checked").val() == allQuestions[currentquestion].correctAnswer) {
+        correctAnswers++;
+      };
+    };
+    
+    $(document).ready(function() {
+      
+        $(".well jumbotron").hide();
+        $('#start').click(function() {
+          $(".jumbotron").fadeIn();
+          $(this).hide();
+        });
+      
+      
+        setupOptions();
+      
+        $("#next").click(function() {
+          event.preventDefault();
+          checkAns();
+          currentquestion++;
+          $(function() {
+            $("#progressbar").progressbar({
+              value: currentquestion
+            });
+          });
+          if (currentquestion < allQuestions.length) {
+            setupOptions();
+            if (currentquestion == allQuestions.length - 1) {
+              $('#next').html("Submit");
+              $('#next').click(function() {
+                $(".jumbotron").hide();
+                $("#result").html("You correctly answered " + correctAnswers + " out of " + currentquestion + " questions! ").hide();
+                $("#result").fadeIn(1500);
+              });
+      
+            };
+      
+          };
+        });
+      });
