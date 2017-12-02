@@ -1,17 +1,12 @@
 
 
 $(document).on('click', "#start", function () {
-    $(this).hide();
-
-    console.log("button clicked");
+    $("#container").empty();
+    $("#game").css("display", "block");
+    timer.start();
+    setupOptions();
 
 });
-
- // Timer loads (from Stopwatch activity)
- window.onload = function() {
-    $("#start").on("click", timer.start);
-  };
-  
   //  Variable that will hold our setInterval that runs the stopwatch
   var intervalId;
   
@@ -29,7 +24,8 @@ $(document).on('click', "#start", function () {
         clockRunning = true;
       }
     },
-   
+   //set me clock to false 
+   //clear the int id (set time out)
     count: function() {
       // DONE: increment time by 1, remember we cant use "this" here.
       timer.time--;
@@ -124,34 +120,19 @@ var allQuestions = [
     
     $(document).ready(function() {
       
-        $(".well jumbotron").hide();
-        $('#start').click(function() {
-          $(".jumbotron").fadeIn();
-          $(this).hide();
-        });
+       
       
-      
-        setupOptions();
-      
-        $("#next").click(function() {
+        $("#next").click(function(event) {
           event.preventDefault();
           checkAns();
           currentquestion++;
-          $(function() {
-            $("#progressbar").progressbar({
-              value: currentquestion
-            });
-          });
           if (currentquestion < allQuestions.length) {
             setupOptions();
             if (currentquestion == allQuestions.length - 1) {
               $('#next').html("Submit");
-              $('#next').click(function() {
-                $(".jumbotron").hide();
                 $("#result").html("You correctly answered " + correctAnswers + " out of " + currentquestion + " questions! ").hide();
                 $("#result").fadeIn(1500);
-              });
-      
+
             };
       
           };
